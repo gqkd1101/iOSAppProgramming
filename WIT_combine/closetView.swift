@@ -94,42 +94,44 @@ struct itemInfo : View {
     @State var isClicked : Bool = false
     
     var body: some View {
-        VStack(alignment: .center) {
-            Image(product.image)
-                .resizable()
-                .aspectRatio(contentMode: .fill)
-                .frame(width: 370, height: 370)
-                .clipped()
-            
-            Text(product.name)
-                .font(.custom("Roboto Regular", size: 20))
-                .frame(width: 370, height: 60,alignment: .topLeading)
-            
-            
-            HStack{
-                Text("\(product.cate) > \(product.subCate)").font(.custom("Roboto Regular", size: 16)).foregroundColor(Color(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.37)))
+        ScrollView{
+            VStack(alignment: .center) {
+                Image(product.image)
+                    .resizable()
+                    .aspectRatio(contentMode: .fill)
+                    .frame(width: 370, height: 370)
+                    .clipped()
                 
-                Spacer()
+                Text(product.name)
+                    .font(.custom("Roboto Regular", size: 20))
+                    .frame(width: 370, height: 60,alignment: .topLeading)
                 
-                Text("\(product.price)₩")
-                    .font(.custom("Roboto Regular", size: 16))
+                
+                HStack{
+                    Text("\(product.cate) > \(product.subCate)").font(.custom("Roboto Regular", size: 16)).foregroundColor(Color(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.37)))
                     
-            }.frame(width: 370, height: 60,alignment: .topLeading)
-            
-            Rectangle()
-                .frame(width: 50, height: 50)
-                .foregroundColor(product.avgColor)
-                .cornerRadius(15)
-                .onTapGesture {
-                    isClicked = true
-                }
-            
-    //        Button("닫기") {
-    //            presentationMode.wrappedValue.dismiss()
-    //        }
-        }.navigationBarTitle(Text(product.brand))//, displayMode: .inline)
-        .sheet(isPresented: $isClicked) {
-            recommendItemView(product: product)
+                    Spacer()
+                    
+                    Text("\(product.price)₩")
+                        .font(.custom("Roboto Regular", size: 16))
+                        
+                }.frame(width: 370, height: 60,alignment: .topLeading)
+                
+                Rectangle()
+                    .frame(width: 50, height: 50)
+                    .foregroundColor(product.avgColor)
+                    .cornerRadius(15)
+                    .onTapGesture {
+                        isClicked = true
+                    }
+                
+        //        Button("닫기") {
+        //            presentationMode.wrappedValue.dismiss()
+        //        }
+            }.navigationBarTitle(Text(product.brand))//, displayMode: .inline)
+            .sheet(isPresented: $isClicked) {
+                recommendItemView(product: product)
+            }
         }
     }
 }
